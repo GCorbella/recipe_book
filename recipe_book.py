@@ -1,5 +1,5 @@
-from pathlib import Path
-from os import system
+from pathlib import Path, PureWindowsPath
+import os
 rute = Path(Path.home(),"Recetas")
 working = True
 
@@ -18,14 +18,24 @@ def welcome():
     return int(chosed)
 
 def r_recipe():
-
+    for folder in Path(rute).glob():
+        print(folder)
+    where = input("From what category? ")
 def n_recipe():
 
 def n_category():
+    nc_name = input("What is the name of the new category? ")
+    nc_rute = PureWindowsPath(Path(rute, nc_name))
+    n_category = os.makedirs(nc_rute)
+    print("Category created!")
 
 def x_recipe():
 
 def x_category():
+    xc_name = input("What is the name of the category you want to remove? ")
+    xc_rute = PureWindowsPath(Path(rute, xc_name))
+    x_category = os.rmdir(xc_rute)
+    print("Category removed!")
 
 def shut_down():
     print("Thank you for using Python Recipe Book!")
@@ -34,19 +44,19 @@ def shut_down():
 while working is True:
     #system(cls)
     welcome()
-    if chosed == 1:
+    if welcome() == 1:
         r_recipe()
 
-    elif chosed == 2:
+    elif welcome() == 2:
         n_recipe()
 
-    elif chosed == 3:
+    elif welcome() == 3:
         n_category()
 
-    elif chosed == 4:
+    elif welcome() == 4:
         x_recipe()
 
-    elif chosed == 5:
+    elif welcome() == 5:
         x_category()
 
     else:
